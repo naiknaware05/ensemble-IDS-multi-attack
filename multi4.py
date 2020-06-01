@@ -125,16 +125,35 @@ def worker1(i): #pcap file function
 	wrpcap(filename,pkt_list)
 
 def worker2(m,k):  #pcap to csv function
-	
+	KDD_Extractor_features_26 = ['duration', 'src_bytes', 'dst_bytes', 'land', 
+                             'wrong_fragment', 'urgent', 'count', 'srv_count', 'serror_rate', 'srv_serror_rate', 
+                             'rerror_rate', 'srv_rerror_rate', 'same_srv_rate', 'diff_srv_rate', 'srv_diff_host_rate',
+                             'dst_host_count', 'dst_host_srv_count', 'dst_host_same_srv_rate', 'dst_host_diff_srv_rate',
+                             'dst_host_same_src_port_rate', 'dst_host_srv_diff_host_rate', 'dst_host_serror_rate',
+                             'dst_host_srv_serror_rate', 'dst_host_rerror_rate', 'dst_host_srv_rerror_rate']
+
 	from sklearn.preprocessing import LabelEncoder
 	dataset1=pd.read_csv("/home/aniket/log.csv")
-	dataset1.isnull().sum().sum()
-	dataset1.dropna()
-	X1=dataset1.iloc[m:k,:28]#except last read all
-	X1=X1.apply(LabelEncoder().fit_transform)
+	
+	
+#print("Testing Dataset : ",y1.shape)
+ 
+#Drop tuples with null values 
+# X1 and y1 contains all 42 column
+	dataset1.dropna(how='any',axis=0,inplace = True)
+	#dataset1.isnull().sum().sum()
+	#dataset1.dropna()
+	X1= pd.DataFrame(data = dataset1.iloc[m:k], columns = KDD_Extractor_features_26)
+	#print((m, k))
+	#X1=dataset1.iloc[m:k,:28]#except last read all
+	#print(X1)
+	#X1=X1.apply(LabelEncoder().fit_transform)
+	#print(X1)
 	#print(eclf3.predict(X1))
 	a=[]
 	a = pd.Series([]) 
+	#print("Any null values in Testing dataset : ", X1.isnull().values.any())
+	#X1.to_csv('x1.csv',index=False)
 	a=eclf3.predict(X1)
 	
 
