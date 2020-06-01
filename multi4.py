@@ -130,12 +130,12 @@ def worker2(m,k):  #pcap to csv function
                              'rerror_rate', 'srv_rerror_rate', 'same_srv_rate', 'diff_srv_rate', 'srv_diff_host_rate',
                              'dst_host_count', 'dst_host_srv_count', 'dst_host_same_srv_rate', 'dst_host_diff_srv_rate',
                              'dst_host_same_src_port_rate', 'dst_host_srv_diff_host_rate', 'dst_host_serror_rate',
-                             'dst_host_srv_serror_rate', 'dst_host_rerror_rate', 'dst_host_srv_rerror_rate','class']
+                             'dst_host_srv_serror_rate', 'dst_host_rerror_rate', 'dst_host_srv_rerror_rate']
 
 	from sklearn.preprocessing import LabelEncoder
 	dataset1=pd.read_csv("/home/aniket/log.csv")
 	
-	print("Any null values in Testing dataset : ", dataset1.isnull().values.any())
+	
 #print("Testing Dataset : ",y1.shape)
  
 #Drop tuples with null values 
@@ -152,11 +152,13 @@ def worker2(m,k):  #pcap to csv function
 	#print(eclf3.predict(X1))
 	a=[]
 	a = pd.Series([]) 
+	#print("Any null values in Testing dataset : ", X1.isnull().values.any())
+	#X1.to_csv('x1.csv',index=False)
 	a=eclf3.predict(X1)
-	print(a)
+	
 
 
-	'''d=[[]]
+	d=[[]]
 	
 	#print(a[1])
 	with open('log.csv', newline='') as f:
@@ -206,7 +208,7 @@ def worker2(m,k):  #pcap to csv function
 	
 	
 	popupmsg(d,d1,count)
-	'''
+	
 
 import multiprocessing 
 import os 

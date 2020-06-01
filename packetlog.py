@@ -18,6 +18,7 @@ def main(arg):
 	i=0	
 	while time.time() < t_end and len(col_a)>k:
 		m=k
+		k=col_a[::-1].index(col_a[m])
 		cu=col_a[m:k]
 		#hhhh=
 		strg="(sudo python3 multi4.py "+str(m)+" "+str(k)+")"
